@@ -18,6 +18,9 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 
+// bring in the database connection
+require("./app_api/models/db");
+
 app.use(["/", "/index.html"], require("./app_server/routes/index"));
 app.use(["/about", "/about.html"], require("./app_server/routes/about"));
 app.use(["/contact", "/contact.html"], require("./app_server/routes/contact"));
@@ -25,6 +28,7 @@ app.use(["/meals", "/meals.html"], require("./app_server/routes/meals"));
 app.use(["/news", "/news.html"], require("./app_server/routes/news"));
 app.use(["/rooms", "/rooms.html"], require("./app_server/routes/rooms"));
 app.use(["/travel", "/travel.html"], require("./app_server/routes/travel"));
+app.use(["/api"], require("./app_api/routes/index"));
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
