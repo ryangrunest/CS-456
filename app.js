@@ -4,6 +4,7 @@ var path = require("path");
 var cookieParser = require("cookie-parser");
 var hbs = require("hbs");
 var logger = require("morgan");
+var cors = require("cors");
 
 var app = express();
 
@@ -28,7 +29,7 @@ app.use(["/meals", "/meals.html"], require("./app_server/routes/meals"));
 app.use(["/news", "/news.html"], require("./app_server/routes/news"));
 app.use(["/rooms", "/rooms.html"], require("./app_server/routes/rooms"));
 app.use(["/travel", "/travel.html"], require("./app_server/routes/travel"));
-app.use(["/api"], require("./app_api/routes/index"));
+app.use(["/api"], cors(), require("./app_api/routes/index"));
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
